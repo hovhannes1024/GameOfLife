@@ -1,12 +1,9 @@
-class Grass {
-    constructor(x, y) {
+class Parent {
+    constructor(x, y,){
         this.x = x;
         this.y = y;
-        this.energy = 5;
         this.multiply = 0;
-
     }
-
     newDirections() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -19,6 +16,12 @@ class Grass {
             [this.x + 1, this.y + 1]
         ];
     }
+}
+class Grass extends Parent{
+    constructor(x, y) {
+        super(x, y);
+        this.energy = 5;
+    }   
 
     getDirections(t) {
         this.newDirections();
@@ -54,26 +57,10 @@ class Grass {
         }
     }
 }
-class Eatgrass {
+class Eatgrass extends Parent{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.multiply = 0;
+        super(x, y);
         this.energy = 3;
-        this.directions =[];
-    }
-
-    newDirections() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
 
     getDirections(t) {
@@ -176,26 +163,10 @@ class Eatgrass {
         }
     }
 }
-class Predator{
+class Predator extends Parent{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.multiply = 0;
+        super(x, y);
         this.energy = 10;
-        this.directions =[];
-    }
-
-    newDirections() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
 
     getDirections(t1,t2,t3) {
@@ -302,23 +273,9 @@ class Predator{
         }
     }
 }
-class Water {
+class Water extends Parent{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.multiply = 0;
-    }
-    newDirections() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
+        super(x, y);
     }
     getDirections(t) {
         this.newDirections();
@@ -381,7 +338,7 @@ class Lightning{
         }
     }
     return found;
-}
+    }
     move() {
         let cord = this.getDirections();
         for (let i in cord) {

@@ -4,8 +4,6 @@ var grassCount = 120;
 var eatGrassCount = 10;
 var matrix = [];
 
-
-//Լցնենք մատրիցան 0-ներով
 for (var i = 0; i < bardz; i++) {
     matrix.push([]);
     for (var j = 0; j < layn; j++) {
