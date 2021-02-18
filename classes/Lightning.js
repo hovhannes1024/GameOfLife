@@ -1,9 +1,5 @@
 var Parent = require("./Parent");
 module.exports = class Lightning extends Parent{
-    constructor(x, y) {
-        super(x, y);
-        this.multiply = 0;
-    }
     getDirections() {
         this.newDirections();
         var found = [];
