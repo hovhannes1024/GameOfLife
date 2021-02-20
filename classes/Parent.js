@@ -16,4 +16,8 @@ module.exports = class Parent {
             [this.x + 1, this.y + 1]
         ];
     }
+    random(arr){
+        let a = arr[Math.floor( Math.random() * arr.length)];
+        return a;
+    }
 }

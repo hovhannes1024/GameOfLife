@@ -1,4 +1,6 @@
+const { request } = require("express");
 var Parent = require("./Parent");
+var Grass = require("./Grass");
 module.exports = class Water extends Parent{
     constructor(x, y) {
         super(x, y);
@@ -22,7 +24,7 @@ module.exports = class Water extends Parent{
         if (this.multiply >= 8) {
 
             var fundCords = this.getDirections(0);
-            var cord = random(fundCords);
+            var cord = super.random(fundCords);
             if (cord) {
                 var x = cord[0];
                 var y = cord[1];

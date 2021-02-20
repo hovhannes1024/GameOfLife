@@ -22,7 +22,7 @@ module.exports = class Predator extends Parent{
 
     move() {
         var fundCords = this.getDirections(0,1,2);
-        var cord = random(fundCords);
+        var cord = super.random(fundCords);
 
         if (cord) {
             var x = cord[0];
@@ -43,7 +43,7 @@ module.exports = class Predator extends Parent{
 
     eat() {
         var fundCords = this.getDirections(2);
-        var cord = random(fundCords);
+        var cord = super.random(fundCords);
 
         if (cord) {
             var x = cord[0];
@@ -83,7 +83,7 @@ module.exports = class Predator extends Parent{
 
     mul() {
         var fundCords = this.getDirections(1,2);
-        var cord = random(fundCords);
+        var cord = super.random(fundCords);
 
         if (cord) {
             var x = cord[0];

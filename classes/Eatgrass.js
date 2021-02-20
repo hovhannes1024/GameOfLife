@@ -22,7 +22,7 @@ module.exports = class Eatgrass extends Parent{
 
     move() {
         var fundCords = this.getDirections(0);
-        var cord = random(fundCords);
+        var cord = super.random(fundCords);
 
         if (cord) {
             var x = cord[0];
@@ -39,7 +39,7 @@ module.exports = class Eatgrass extends Parent{
 
     eat() {
         var fundCords = this.getDirections(1);
-        var cord = random(fundCords);
+        var cord = super.random(fundCords);
 
         if (cord) {
             var x = cord[0];
@@ -79,7 +79,7 @@ module.exports = class Eatgrass extends Parent{
 
     mul() {
         var fundCords = this.getDirections(0);
-        var cord = random(fundCords);
+        var cord = super.random(fundCords);
 
         if (cord) {
             var x = cord[0];
