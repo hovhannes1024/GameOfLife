@@ -38,23 +38,30 @@ module.exports = class Lightning extends Parent{
                     grassArr.splice(j, 1);
                 }
             }
+            for (let j in diedAnimalArr) {
+                if (x1 == diedAnimalArr[j].x && y1 == diedAnimalArr[j].y || this.x == diedAnimalArr[j].x && this.y == diedAnimalArr[j].y) {
+                    diedAnimalArr.splice(j, 1);
+                }
+            }
         }
     }
     move() {
-        if(this.multiply == 0){
-            matrix[this.y][this.x] = 0;
-        }
+        if(season == 0){    
+            if(this.multiply == 0){
+                matrix[this.y][this.x] = 0;
+            }
 
-        this.multiply++;
+            this.multiply++;
 
-        if(this.multiply >= 5) {
-            let y = Math.floor(Math.random() * matrix.length);
-            let x = Math.floor(Math.random() * matrix[y].length);
-            matrix[y][x] = 5;
-            this.x = x;
-            this.y = y;
-            this.destroy();
-            this.multiply = 0;
+            if(this.multiply >= 5) {
+                let y = Math.floor(Math.random() * matrix.length);
+                let x = Math.floor(Math.random() * matrix[y].length);
+                matrix[y][x] = 5;
+                this.x = x;
+                this.y = y;
+                this.destroy();
+                this.multiply = 0;
+            }
         }
     }
 }

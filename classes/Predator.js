@@ -1,4 +1,7 @@
 var Parent = require("./Parent");
+var DiedAnimal = require("./DiedAnimal");
+var Evaporation = require("./Land");
+
 module.exports = class Predator extends Parent{
     constructor(x, y) {
         super(x, y);
@@ -21,7 +24,7 @@ module.exports = class Predator extends Parent{
     }
 
     move() {
-        var fundCords = this.getDirections(0,1,2);
+        var fundCords = this.getDirections(0, 1, 7);
         var cord = super.random(fundCords);
 
         if (cord) {
@@ -29,12 +32,17 @@ module.exports = class Predator extends Parent{
             var y = cord[1];
             
             let r = matrix[y][x];
+
             matrix[y][x] = 3;
+            
             if(r == 1){
                 matrix[this.y][this.x] = 1;
             }
             else if(r == 0){
                 matrix[this.y][this.x] = 0;
+            }
+            else if(r == 7){
+                matrix[this.y][this.x] = 7;
             }
             this.x = x;
             this.y = y;
@@ -42,7 +50,7 @@ module.exports = class Predator extends Parent{
     }
 
     eat() {
-        var fundCords = this.getDirections(2);
+        var fundCords = this.getDirections(2, 6);
         var cord = super.random(fundCords);
 
         if (cord) {
@@ -50,26 +58,37 @@ module.exports = class Predator extends Parent{
             var y = cord[1];
 
             matrix[y][x] = 3;
-            matrix[this.y][this.x] = 0;
+            Evaporation(this.y, this.x);
 
             this.x = x;
             this.y = y;
 
-            this.multiply+=2;
+            if(matrix[y][x] == 2){
+                for (var i in grasseaterArr) {
+                    if (x == grasseaterArr[i].x && y == grasseaterArr[i].y) {
+                        grasseaterArr.splice(i, 1);
+                        
+                        this.multiply+=3;
 
-            this.energy+=2;
+                        this.energy+=3;
+                    }
+                }
+            }else if(matrix[y][x] == 6){
+                for (var i in diedAnimalArr) {
+                    if (x == diedAnimalArr[i].x && y == diedAnimalArr[i].y) {
+                        diedAnimalArr.splice(i, 1);
+                        
+                        this.multiply++;
 
-            for (var i in grasseaterArr) {
-                if (x == grasseaterArr[i].x && y == grasseaterArr[i].y) {
-                    grasseaterArr.splice(i, 1);
+                        this.energy++;
+                    }
                 }
             }
 
-            if (this.multiply == 4) {
+            if (this.multiply >= 6) {
                 this.mul()
                 this.multiply = 0;
             }
-
 
         }
         else {
@@ -100,12 +119,14 @@ module.exports = class Predator extends Parent{
     }
 
     die() {
-        matrix[this.y][this.x] = 0;
+        matrix[this.y][this.x] = 6;
 
         for (var i in predatorArr) {
             if (this.x == predatorArr[i].x && this.y == predatorArr[i].y) {
                 predatorArr.splice(i, 1);
             }
         }
+        var newDiedAnimal = new DiedAnimal(this.x, this.y);
+        diedAnimalArr.push(newDiedAnimal);
     }
 }

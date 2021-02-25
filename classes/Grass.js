@@ -21,8 +21,8 @@ module.exports = class Grass extends Parent{
     }
 
     mul() {
-        this.multiply++;
-        if (this.multiply == 3) {
+        this.multiply+=2;
+        if (this.multiply >= 4) {
 
             var fundCords = this.getDirections(0);
             var cord = super.random(fundCords);

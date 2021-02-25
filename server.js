@@ -18,17 +18,24 @@ var waterCount = 20;
 var grasseaterCount = 100;
 var predatorCount = 120;
 var lightningCount = 1;
+
 lightningArr = [];
 grassArr = [];
 grasseaterArr = [];
 predatorArr = [];
 waterArr = [];
+diedAnimalArr = [];
+
+season = 0;
+day = 0;
+var tact = 0;
 
 var Grass = require("./classes/Grass");
 var Eatgrass = require("./classes/Eatgrass");
 var Predator = require("./classes/Predator");
 var Water = require("./classes/Water");
 var Lightning = require("./classes/Lightning");
+var Land = require("./classes/Land");
 
 function random(arr){
     let a = Math.random() * arr;
@@ -42,6 +49,7 @@ for (var i = 0; i < height_; i++) {
         matrix[i].push(0);
     }
 }
+io.sockets.emit('send matrix', matrix);
 
 function createObject(matrix) {
     for(let m = 0; m < height_; m++){
@@ -113,22 +121,61 @@ function createObject(matrix) {
     io.sockets.emit('send matrix', matrix);
 }
 function game() {
-    for(var i in grassArr) {
+    if(day >= 30){
+        day = 0;
+        if(season >= 3){
+            season = 0
+        }else{
+            season++;
+        }
+    }else{
+        day++;
+    }
+
+    for(let i in grassArr) {
         grassArr[i].mul();
     }
-    for(var i in grasseaterArr) {
+
+    for(let i in grasseaterArr) {
         grasseaterArr[i].eat();
     }
-    for(var i in predatorArr) {
+
+    for(let i in predatorArr) {
         predatorArr[i].eat();
     }
-    for(var i in waterArr) {
+
+    for(let i in waterArr) {
         waterArr[i].mul();
     }
-    for(var i in lightningArr) {
+
+    for(let i in lightningArr) {
         lightningArr[i].move();
     }
-    
+
+    for(let i in diedAnimalArr) {
+        diedAnimalArr[i].die();
+    }
+
+    for (let i in matrix) {        
+        for (let j in matrix) {
+            if(matrix[i][j] == 0 || matrix[i][j] == 7){
+                Land(i, j);
+            }
+        }
+    }
+    //jri golorshacum
+    if(season == 1){
+        if(tact >= 3){
+            let r = Math.floor(Math.random() * waterArr.length);
+            let water = waterArr[r];
+            matrix[water.y][water.x] = 7;
+            waterArr.splice(r, 1);
+            tact = 0;
+        }else{
+            tact++;
+        }
+    }
+    //jri golorshacum
     io.sockets.emit('send matrix', matrix);
 }
 

@@ -17,11 +17,11 @@ function update(matrix) {
                 rect(j * side, i * side, side, side);
             }
             else if (matrix[i][j] == 2) {
-                fill("orange");
+                fill("yellow");
                 rect(j * side, i * side, side, side);
             }
             else if (matrix[i][j] == 0) {
-                fill('#acacac');
+                fill('#674300');
                 rect(j * side, i * side, side, side);
             }
             else if (matrix[i][j] == 3) {
@@ -34,6 +34,14 @@ function update(matrix) {
             }
             else if (matrix[i][j] == 5) {
                 fill('lightblue');
+                rect(j * side, i * side, side, side);
+            }
+            else if (matrix[i][j] == 6) {
+                fill('lightgreen');
+                rect(j * side, i * side, side, side);
+            }
+            else if (matrix[i][j] == 7) {
+                fill('orange');
                 rect(j * side, i * side, side, side);
             }
         }
