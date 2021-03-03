@@ -1,5 +1,38 @@
 var Parent = require("./Parent");
 module.exports = class Lightning extends Parent{
+    newDirections() {
+        this.directions = [
+            [this.x - 2, this.y - 2],
+            [this.x - 1, this.y - 2],
+            [this.x, this.y - 2],
+            [this.x + 1, this.y - 2],
+            [this.x + 2, this.y - 2],
+
+            [this.x - 2, this.y - 1],
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x + 2, this.y - 1],
+
+            [this.x - 2, this.y],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x + 2, this.y],
+
+            [this.x - 1, this.y + 1],
+            [this.x - 2, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1],
+            [this.x + 2, this.y + 1],
+
+            [this.x - 1, this.y + 2],
+            [this.x - 2, this.y + 2],
+            [this.x, this.y + 2],
+            [this.x + 1, this.y + 2],
+            [this.x + 2, this.y + 2]
+        ];
+    }
+
     getDirections() {
         this.newDirections();
         var found = [];
@@ -45,8 +78,8 @@ module.exports = class Lightning extends Parent{
             }
         }
     }
-    move() {
-        if(season == 0){    
+    move() {   
+        if(season == 0){ 
             if(this.multiply == 0){
                 matrix[this.y][this.x] = 0;
             }
@@ -61,6 +94,10 @@ module.exports = class Lightning extends Parent{
                 this.y = y;
                 this.destroy();
                 this.multiply = 0;
+            }
+        }else{
+            if(matrix[this.y][this.x] == 5){
+                matrix[this.y][this.x] = 0;
             }
         }
     }

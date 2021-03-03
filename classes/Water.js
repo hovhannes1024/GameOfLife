@@ -17,21 +17,26 @@ module.exports = class Water extends Parent{
     }
     
     mul() {
-        this.multiply++;
-        if (this.multiply >= 4) {
+        if(season == 3){
+            this.multiply++;
+            if (this.multiply >= 4) {
 
-            var fundCords = this.getDirections(0);
-            var cord = super.random(fundCords);
-            if (cord) {
-                var xx = cord[0];
-                var yy = cord[1];
+                var fundCords = this.getDirections(0);
+                var cord = super.random(fundCords);
+                if (cord) {
+                    var xx = cord[0];
+                    var yy = cord[1];
 
-                var newGrass = new Grass(xx, yy);
-                grassArr.push(newGrass);
+                    var newGrass = new Grass(xx, yy);
+                    grassArr.push(newGrass);
 
-                matrix[yy][xx] = 1;
-                this.multiply = 0;
+                    matrix[yy][xx] = 1;
+                    this.multiply = 0;
+                }
             }
+            matrix[this.y][this.x] = 8;
+        }else{
+            matrix[this.y][this.x] = 4;
         }
     }
 }

@@ -72,7 +72,7 @@ module.exports = class Eatgrass extends Parent{
                 }
             }
 
-            if (this.multiply >= 5) {
+            if (this.multiply >= 4) {
                 this.mul();
                 this.multiply = 0;
             }

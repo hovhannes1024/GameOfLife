@@ -1,6 +1,6 @@
 var Parent = require("./Parent");
 var DiedAnimal = require("./DiedAnimal");
-var Evaporation = require("./Land");
+var Land = require("./Land");
 
 module.exports = class Predator extends Parent{
     constructor(x, y) {
@@ -57,8 +57,7 @@ module.exports = class Predator extends Parent{
             var x = cord[0];
             var y = cord[1];
 
-            matrix[y][x] = 3;
-            Evaporation(this.y, this.x);
+            Land(this.y, this.x);
 
             this.x = x;
             this.y = y;
@@ -68,9 +67,9 @@ module.exports = class Predator extends Parent{
                     if (x == grasseaterArr[i].x && y == grasseaterArr[i].y) {
                         grasseaterArr.splice(i, 1);
                         
-                        this.multiply+=3;
+                        this.multiply+=2;
 
-                        this.energy+=3;
+                        this.energy+=2;
                     }
                 }
             }else if(matrix[y][x] == 6){
@@ -78,22 +77,23 @@ module.exports = class Predator extends Parent{
                     if (x == diedAnimalArr[i].x && y == diedAnimalArr[i].y) {
                         diedAnimalArr.splice(i, 1);
                         
-                        this.multiply++;
+                        this.multiply ++;
 
-                        this.energy++;
+                        this.energy ++;
                     }
                 }
             }
 
-            if (this.multiply >= 6) {
+            if (this.multiply >= 10) {
                 this.mul()
                 this.multiply = 0;
             }
 
+            matrix[this.y][this.x] = 3;
         }
         else {
             this.move();
-            this.energy--;
+            this.energy -= 2;
             if (this.energy <= 0){
                 this.die();
             }
@@ -107,8 +107,6 @@ module.exports = class Predator extends Parent{
         if (cord) {
             var x = cord[0];
             var y = cord[1];
-
-            this.multiply++;
 
             var newPredator = new Predator(x, y);
             predatorArr.push(newPredator);

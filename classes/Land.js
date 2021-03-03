@@ -67,8 +67,8 @@ module.exports = function land(y1, x1){
 
         [x1 - 5, y1],
         [x1 - 4, y1],
-        [x1 - 3, y1],     
-        [x1 - 2, y1], 
+        [x1 - 3, y1],
+        [x1 - 2, y1],
         [x1 - 1, y1],
         [x1 + 1, y1],
         [x1 + 2, y1],
